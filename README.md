@@ -1,6 +1,4 @@
-## Todo
-
-### Clozy
+## Clozy - Todo
 
 ```
 Currently busy with some other important things, will definately would like to imporove the app with
