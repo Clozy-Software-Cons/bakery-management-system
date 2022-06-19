@@ -1,34 +1,19 @@
-FROM php:8.0-fpm
+FROM node:16
 
-# Arguments defined in docker-compose.yml
-ARG user
-ARG uid
+# Create app directory
+WORKDIR /usr/src/app
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    git \
-    curl \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev \
-    zip \
-    unzip
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
+COPY package*.json ./
 
-# Clear cache
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN npm install
+# If you are building your code for production
+# RUN npm ci --only=production
 
-# Install PHP extensions
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+# Bundle app source
+COPY . .
 
-# Get latest Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
-# Create system user to run Composer and Artisan Commands
-RUN useradd -G www-data,root -u $uid -d /home/$user $user
-RUN mkdir -p /home/$user/.composer && \
-    chown -R $user:$user /home/$user
-
-# Set working directory
-WORKDIR /var/www
-
-USER $user
+EXPOSE 8080
+CMD [ "node", "index.js" ]
