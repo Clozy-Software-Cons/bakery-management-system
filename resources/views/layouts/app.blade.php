@@ -11,12 +11,19 @@
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
+    <link rel="shortcut icon" href="{{ asset('assets/img/png logo.png') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset('assets/css/sb-admin-2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/fontawesome-free/css/all.min.css') }}">
 
     <script src="{{ asset('assets/js/sb-admin-2.min.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <style>
+        .bg-gradient-dark {
+            background-color: #1d1d1f;
+            background-image: none
+        }
+    </style>
 </head>
 
 <body class="font-sans antialiased" id="page-top">
@@ -45,7 +52,8 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="img-profile rounded-circle" src="{{ asset('assets/img/undraw_profile_1.svg') }}">
+                                <img class="img-profile rounded-circle"
+                                    src="{{ asset('assets/img/undraw_profile_1.svg') }}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -63,11 +71,13 @@
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal"
-                                    data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
-                                </a>
+                                <form action="{{ route('logout') }}" method="post">
+                                    @csrf
+                                    <button class="dropdown-item">
+                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Logout
+                                    </button>
+                                </form>
                             </div>
                         </li>
 

@@ -1,14 +1,8 @@
 @extends('layouts.guest')
 @section('body_class')
-    bg-gradient-primary
+    bg-gradient-dark
 @endsection
 @section('content')
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-
-    <!-- Validation Errors -->
-    <x-auth-validation-errors class="mb-4" :errors="$errors" />
-
     <div class="container">
 
         <!-- Outer Row -->
@@ -20,11 +14,18 @@
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                            <div class="col-lg-6 d-none d-lg-block bg-login-image"
+                                style="background:url({{ asset('assets/img/bread.png') }})"></div>
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                        <!-- Session Status -->
+                                        <x-auth-session-status class="mb-4" :status="session('status')" />
+
+                                        <!-- Validation Errors -->
+                                        <x-auth-validation-errors class="mb-4 text-danger" :errors="$errors" />
+
                                     </div>
                                     <form method="POST" action="{{ route('login') }}" class="user">
                                         @csrf
@@ -44,17 +45,8 @@
                                         </div>
 
 
-                                        <div class="flex items-center justify-end mt-4">
-                                            @if (Route::has('password.request'))
-                                                <a class="underline text-sm text-gray-600 hover:text-gray-900"
-                                                    href="{{ route('password.request') }}">
-                                                    {{ __('Forgot your password?') }}
-                                                </a>
-                                            @endif
-
-                                            <x-button class="ml-3">
-                                                {{ __('Log in') }}
-                                            </x-button>
+                                        <div class="text-center mt-4">
+                                            <button type="submit" class="btn btn-primary">Login</button>
                                         </div>
                                     </form>
                                 </div>
