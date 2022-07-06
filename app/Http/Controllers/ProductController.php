@@ -9,7 +9,9 @@ class ProductController extends Controller
 {
     public function indexPage()
     {
-        return view('products.index');
+        $products = Product::latest()->get();
+
+        return view('products.index', compact(['products']));
     }
 
     public function createPage()
