@@ -15,8 +15,8 @@
     <link rel="stylesheet" href="{{ asset('assets/css/sb-admin-2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/fontawesome-free/css/all.min.css') }}">
 
-    <script src="{{ asset('assets/js/sb-admin-2.min.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="{{ asset('assets/js/sb-admin-2.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <style>
         .bg-gradient-dark {
@@ -51,24 +51,16 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin</span>
                                 <img class="img-profile rounded-circle"
                                     src="{{ asset('assets/img/undraw_profile_1.svg') }}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="javascript:void(0)">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <form action="{{ route('logout') }}" method="post">
@@ -96,6 +88,28 @@
         </div>
     </div>
 
+    <script>
+        $(document).ready(function() {
+
+            // function for dynamic routing highlight sidebar
+            const route = "{{ URL::current() }}";
+            const location = window.location.href;
+
+            if (location == route || location == route + '/') {
+
+                let a_tag = $('a[href="' + route + '"]');
+
+                if (a_tag.attr('class') == 'collapse-item') {
+                    a_tag.parent().parent().parent().addClass('active');
+                    a_tag.parent().parent().addClass('show');
+                    a_tag.addClass('active')
+                } else {
+                    a_tag.parent().addClass('active')
+                }
+
+            }
+        })
+    </script>
 </body>
 
 </html>
