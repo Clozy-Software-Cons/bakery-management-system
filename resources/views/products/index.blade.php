@@ -3,6 +3,15 @@
 @section('content')
     <div class="row">
         <div class="col-12">
+            @if (session('success'))
+                <div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    {{ session('success') }}
+                </div>
+            @endif
+
             <h5 class="mb-4">Product List</h5>
 
             <div class="card">
@@ -32,8 +41,10 @@
                                         <td>{{ $product->price }}</td>
                                         <td>{{ $product->quantity . ' ' . $product->measure_unit }}</td>
                                         <td class="text-center" style="width: 200px">
-                                            <a href="{{ route('products.page.edit') }}"
+                                            <a href="{{ route('products.page.edit', $product->id) }}"
                                                 class="btn btn-warning d-inline-block">Edit</a>
+                                            <a href="{{ route('products.page.edit-stock', $product->id) }}"
+                                                class="btn btn-info d-inline-block">Stock</a>
                                             <form class="d-inline-block" action="{{ route('products.delete') }}"
                                                 method="post">
                                                 <input type="hidden" name="id" value="{{ $product->id }}">

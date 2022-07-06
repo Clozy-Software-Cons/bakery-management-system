@@ -29,8 +29,10 @@ Route::middleware([
 ])->group(function () {
     Route::get('/products', [ProductController::class, 'indexPage'])->name('products.page.index');
     Route::get('/products-create', [ProductController::class, 'createPage'])->name('products.page.create');
-    Route::get('/products-edit', [ProductController::class, 'editPage'])->name('products.page.edit');
-    Route::post('/products-store', [ProductController::class, 'storeProduct'])->name('products.page.store');
+    Route::get('/products-edit/{id}', [ProductController::class, 'editPage'])->name('products.page.edit');
+    Route::get('/products-edit-stock/{id}', [ProductController::class, 'editStockPage'])->name('products.page.edit-stock');
+    Route::post('/products-store', [ProductController::class, 'storeProduct'])->name('products.store');
     Route::post('/products-update', [ProductController::class, 'updateProduct'])->name('products.update');
+    Route::post('/products-update-stock', [ProductController::class, 'updateProductStock'])->name('products.update-stock');
     Route::post('/products-delete', [ProductController::class, 'deleteProduct'])->name('products.delete');
 });
