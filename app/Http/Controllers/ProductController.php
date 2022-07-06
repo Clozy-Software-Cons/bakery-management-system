@@ -103,8 +103,13 @@ class ProductController extends Controller
         return redirect()->route('products.page.index')->withSuccess($selectedProduct['name'] . ' stock updated from ' . $selectedProduct['quantity'] . ' ' . $selectedProduct['measure_unit'] . ' to ' . number_format($quantity, 2) . $selectedProduct['measure_unit'] . '.');
     }
 
-    public function deleteProduct()
+    public function deleteProduct(Request $request)
     {
+        $validated = $request->validate([
+            'id' => ['required', 'numeric'],
+        ]);
 
+        Product::findOrFail($validated['id'])->delete();
+        return redirect()->route('products.page.index')->withSuccess('Product deleted successfully.');
     }
 }

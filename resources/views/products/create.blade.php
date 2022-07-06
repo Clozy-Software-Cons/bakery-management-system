@@ -16,7 +16,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <form action="{{ route('products.page.store') }}" method="POST">
+                    <form action="{{ route('products.store') }}" method="POST">
                         @csrf
 
                         <div class="form-group row">

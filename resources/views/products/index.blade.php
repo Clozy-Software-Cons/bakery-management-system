@@ -47,8 +47,10 @@
                                                 class="btn btn-info d-inline-block">Stock</a>
                                             <form class="d-inline-block" action="{{ route('products.delete') }}"
                                                 method="post">
+                                                @csrf
                                                 <input type="hidden" name="id" value="{{ $product->id }}">
-                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                                <button type="submit" class="btn btn-danger"
+                                                    id="btn_delete_product">Delete</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -65,4 +67,14 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).on("click", "#btn_delete_product", function(e) {
+            e.preventDefault();
+
+            if (confirm('Confirm to delete this product?')) {
+                $(this).closest('form').submit();
+            }
+        });
+    </script>
 @endsection
