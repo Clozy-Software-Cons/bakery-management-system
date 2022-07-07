@@ -23,15 +23,13 @@ class CreateProductOrdersTable extends Migration
             $table->text('filling');
             $table->text('shape');
             $table->text('size');
-            $table->text('board');
             $table->double('price');
-            $table->date('order_date');
-            $table->date('dispatch_date');
-            $table->time('dispatch_time');
-            $table->text('dispatch_day');
+            $table->dateTime('order_datetime');
+            $table->dateTime('dispatch_datetime')->nullable();
             $table->text('dispatch_place');
             $table->text('remark');
             $table->text('status');
+            $table->timestamps();
         });
     }
 
@@ -42,6 +40,6 @@ class CreateProductOrdersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_orders');
+        Schema::dropIfExists('product_order');
     }
 }

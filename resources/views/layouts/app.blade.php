@@ -16,8 +16,6 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/fontawesome-free/css/all.min.css') }}">
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="{{ asset('assets/js/sb-admin-2.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <style>
         .bg-gradient-dark {
             background-color: #1d1d1f;
@@ -82,18 +80,30 @@
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
+                @if (session('error'))
+                    <div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show"
+                        role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        {{ session('error') }}
+                    </div>
+                @endif
                 {{ $slot ?? null }}
                 @yield('content')
             </div>
         </div>
     </div>
 
+    <script src="{{ asset('assets/js/sb-admin-2.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
     <script>
         $(document).ready(function() {
 
             // function for dynamic routing highlight sidebar
             const route = "{{ URL::current() }}";
-            const location = window.location.href;
+            const location = window.location.href.split('?')[0];
 
             if (location == route || location == route + '/') {
 
