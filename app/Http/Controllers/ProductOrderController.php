@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Session;
 
 class ProductOrderController extends Controller
 {
+
+    public function __construct()
+    {
+        return $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
