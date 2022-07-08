@@ -41,4 +41,5 @@ Route::middleware([
 Route::middleware('auth')->group(function () {
     Route::match(['get', 'post'], 'orders', [ProductOrderController::class, 'index'])->name('product_orders.index');
     Route::get('/order/{id}', [ProductOrderController::class, 'show'])->name('product_orders.show');
+    Route::post('/products-order-delete', [ProductOrderController::class, 'deleteProductOrder'])->name('products_orders.delete');
 });

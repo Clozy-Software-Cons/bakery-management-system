@@ -74,10 +74,15 @@
                                                         <a href="{{ route('product_orders.show', $order->cust_id) }}"
                                                             class="btn btn-sm btn-info d-inline-block">Info</a>
                                                         <a href=""
-                                                            class="btn btn-sm btn-warning d-inline-block">Edit</a>
-                                                        <a href=""
-                                                            class="btn btn-sm btn-danger d-inline-block">Delete</a>
-                                                    </td>
+                                                            class="btn btn-sm btn-warning d-inline-block">Edit</a>                                    
+                                                            <form class="d-inline-block" action="{{ route('products_orders.delete') }}"
+                                                                method="post">
+                                                                @csrf
+                                                                <input type="hidden" name="id" value="{{ $order->cust_id }}">
+                                                                <button type="submit" class="btn btn-sm btn-danger d-inline-block"
+                                                                    id="btn_delete_product_order">Delete</button>
+                                                            </form>
+                                                        </td>
                                                 </tr>
                                             @endforeach
                                         @else
@@ -97,9 +102,14 @@
             </div>
         </div>
     </div>
-    <script>
-        $(document).ready(function() {
 
-        })
+    <script>
+        $(document).on("click", "#btn_delete_product_order", function(e) {
+            e.preventDefault();
+
+            if (confirm('Confirm to delete this product order?')) {
+                $(this).closest('form').submit();
+            }
+        });
     </script>
 @endsection
