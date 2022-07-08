@@ -44,7 +44,7 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Product Quantity</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control @error('quantity') {{ 'is-invalid' }} @enderror"
+                                <input type="number" class="form-control @error('quantity') {{ 'is-invalid' }} @enderror"
                                     name="quantity" value="{{ old('quantity') }}" required>
                                 @error('quantity')
                                     <div class="invalid-feedback">{{ $message }}</div>

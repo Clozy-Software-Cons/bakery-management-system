@@ -20,13 +20,13 @@
      <li class="nav-item">
          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#product_collape"
              aria-expanded="true" aria-controls="collapseTwo">
-             <i class="fas fa-fw fa-cog"></i>
+             <i class="fas fa-archive"></i>
              <span>Product</span>
          </a>
          <div id="product_collape" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
              <div class="bg-white py-2 collapse-inner rounded">
-                 <a class="collapse-item" href="{{ route('products.page.create') }}">Make New</a>
-                 <a class="collapse-item" href="{{ route('products.page.index') }}">List</a>
+                 <a class="collapse-item" href="{{ route('products.page.create') }}"><i class="fa fa-plus mx-2"></i>New Product</a>
+                 <a class="collapse-item" href="{{ route('products.page.index') }}"><i class="fa fa-table mx-2"></i>Product List</a>
              </div>
          </div>
      </li>
@@ -43,14 +43,13 @@
      <li class="nav-item">
          <a class="nav-link collapsed" href="javascript:void(0)" data-toggle="collapse" data-target="#collapseTwo"
              aria-expanded="true" aria-controls="collapseTwo">
-             <i class="fas fa-fw fa-cog"></i>
+             <i class="far fa-sticky-note"></i>
              <span>Order</span>
          </a>
          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
              <div class="bg-white py-2 collapse-inner rounded">
-                 <h6 class="collapse-header">Sections: </h6>
-                 <a class="collapse-item" href="{{ route('product_orders.create') }}">Make New</a>
-                 <a class="collapse-item" href="{{ route('product_orders.index') }}">List</a>
+                 <a class="collapse-item" href="{{ route('product_orders.create') }}"><i class="fa fa-plus mx-2"></i>New Order</a>
+                 <a class="collapse-item" href="{{ route('product_orders.index') }}"><i class="fa fa-table mx-2"></i>Order List</a>
              </div>
          </div>
      </li>
