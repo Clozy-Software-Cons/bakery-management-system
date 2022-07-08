@@ -34,7 +34,7 @@ class ProductOrderController extends Controller
         $product_orders = ProductOrder::get_records($search);
 
         return view('product_orders.index', [
-            'status' => ['pending' => 'Pending', 'ready' => 'Ready', 'delivery' => 'Delivery'],
+            'status' => ['pending' => 'Pending', 'ready' => 'Ready', 'delivered' => 'Delivery'],
             'search' => $search,
             'product_orders' => $product_orders
         ]);
@@ -60,21 +60,7 @@ class ProductOrderController extends Controller
     {
         //dd($request->all());
 
-        $validated = $request->validate([
-            'cust_name' => ['required', 'max:255'],
-            'cust_hpn' => ['required', 'max:255'],
-            'type' => ['required', 'max:255'],
-            'quantity' => ['required', 'regex:/^\d{0,8}(\.\d{1,2})?$/'],
-            'flavour' => ['required', 'max:255'],
-            'filling' => ['required', 'max:255'],
-            'shape' => ['required', 'max:255'],
-            'size' => ['required', 'max:255'],
-            'price' => ['required', 'regex:/^\d{0,8}(\.\d{1,2})?$/'],
-            'order_datetime' => ['required'],
-            'dispatch_datetime' => ['required'],
-            'dispatch_place' => ['required', 'max:255'],
-            'status' => ['required', 'max:255'],
-        ]);
+        $validated = $this->validateRequest($request);
 
         ProductOrder::create($validated);
 
@@ -103,24 +89,30 @@ class ProductOrderController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ProductOrder  $productOrder
      * @return \Illuminate\Http\Response
      */
-    public function edit(ProductOrder $productOrder)
+    public function editOrder($productOrder)
     {
-        //
+        $productOrder = ProductOrder::findOrFail($productOrder);
+        return view('product_orders.edit', [
+            'order' => $productOrder
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ProductOrder  $productOrder
+     * @param    $productOrder
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ProductOrder $productOrder)
+    public function updateOrder(Request $request, $productOrder)
     {
-        //
+        $validated = $this->validateRequest($request);
+        $productOrder = ProductOrder::findOrFail($productOrder);
+        $productOrder->update($validated);
+
+        return redirect(route('product_orders.edit', $productOrder->cust_id))->withSuccess('updated successfully.');
     }
 
     /**
@@ -142,5 +134,25 @@ class ProductOrderController extends Controller
 
         ProductOrder::findOrFail($validated['id'])->delete();
         return redirect()->route('product_orders.index')->withSuccess('Product deleted successfully.');
+    }
+
+    private function validateRequest(Request $request)
+    {
+        return $request->validate([
+            'cust_name' => ['required', 'max:255'],
+            'cust_hpn' => ['required', 'max:255'],
+            'type' => ['required', 'max:255'],
+            'quantity' => ['required', 'regex:/^\d{0,8}(\.\d{1,2})?$/'],
+            'flavour' => ['required', 'max:255'],
+            'filling' => ['required', 'max:255'],
+            'shape' => ['required', 'max:255'],
+            'size' => ['required', 'max:255'],
+            'price' => ['required', 'regex:/^\d{0,8}(\.\d{1,2})?$/'],
+            'order_datetime' => ['required'],
+            'dispatch_datetime' => ['required'],
+            'dispatch_place' => ['required', 'max:255'],
+            'status' => ['required', 'max:255'],
+            'remark' => ['nullable'],
+        ]);
     }
 }

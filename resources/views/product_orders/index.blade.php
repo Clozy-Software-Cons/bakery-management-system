@@ -73,8 +73,8 @@
                                                     <td class="text-center" style="width: 200px">
                                                         <a href="{{ route('product_orders.show', $order->cust_id) }}"
                                                             class="btn btn-sm btn-info d-inline-block">Info</a>
-                                                        <a href=""
-                                                            class="btn btn-sm btn-warning d-inline-block">Edit</a>                                    
+                                                        <a href="{{ route('product_orders.edit', $order->cust_id) }}"
+                                                            class="btn btn-sm btn-warning d-inline-block">Edit</a>
                                                             <form class="d-inline-block" action="{{ route('products_orders.delete') }}"
                                                                 method="post">
                                                                 @csrf
