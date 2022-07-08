@@ -10,7 +10,7 @@
         </div>
     @endif
 
-    <h5 class="mb-4">Create new product</h5>
+    <h5 class="mb-4">Create New Product</h5>
 
     <div class="row">
         <div class="col-12">

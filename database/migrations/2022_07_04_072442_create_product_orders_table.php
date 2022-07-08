@@ -27,7 +27,7 @@ class CreateProductOrdersTable extends Migration
             $table->dateTime('order_datetime');
             $table->dateTime('dispatch_datetime')->nullable();
             $table->text('dispatch_place');
-            $table->text('remark');
+            $table->text('remark')->nullable();
             $table->text('status');
             $table->timestamps();
         });

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Models\ProductOrder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -44,9 +45,9 @@ class ProductOrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function createPage(Request $request)
     {
-        //
+        return view('product_orders.create');
     }
 
     /**
@@ -55,9 +56,29 @@ class ProductOrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function storeOrder(Request $request)
     {
-        //
+        //dd($request->all());
+
+        $validated = $request->validate([
+            'cust_name' => ['required', 'max:255'],
+            'cust_hpn' => ['required', 'max:255'],
+            'type' => ['required', 'max:255'],
+            'quantity' => ['required', 'regex:/^\d{0,8}(\.\d{1,2})?$/'],
+            'flavour' => ['required', 'max:255'],
+            'filling' => ['required', 'max:255'],
+            'shape' => ['required', 'max:255'],
+            'size' => ['required', 'max:255'],
+            'price' => ['required', 'regex:/^\d{0,8}(\.\d{1,2})?$/'],
+            'order_datetime' => ['required'],
+            'dispatch_datetime' => ['required'],
+            'dispatch_place' => ['required', 'max:255'],
+            'status' => ['required', 'max:255'],
+        ]);
+
+        ProductOrder::create($validated);
+
+        return redirect()->back()->withSuccess('New order created.');
     }
 
     /**
