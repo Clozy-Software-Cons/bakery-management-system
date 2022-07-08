@@ -133,4 +133,14 @@ class ProductOrderController extends Controller
     {
         //
     }
+
+    public function deleteProductOrder(Request $request)
+    {
+        $validated = $request->validate([
+            'id' => ['required', 'numeric'],
+        ]);
+
+        ProductOrder::findOrFail($validated['id'])->delete();
+        return redirect()->route('product_orders.index')->withSuccess('Product deleted successfully.');
+    }
 }

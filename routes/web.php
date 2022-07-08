@@ -43,4 +43,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/order/{id}', [ProductOrderController::class, 'show'])->name('product_orders.show');
     Route::get('/orders/create', [ProductOrderController::class, 'createPage'])->name('product_orders.create');
     Route::post('/orders/store', [ProductOrderController::class, 'storeOrder'])->name('product_orders.store');
+    Route::post('/products-order-delete', [ProductOrderController::class, 'deleteProductOrder'])->name('products_orders.delete');
 });
